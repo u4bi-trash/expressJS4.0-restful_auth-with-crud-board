@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>우분투 리눅스 웹서버</title>
+
+</head>
+
+<body>
+메인 페이지<br>
+
+<% if(typeof userid =="undefined"){%>
+	<input type="button" value="로그인" onclick="window.location='/login';" /><br>   
+	<input type="button" value="회원가입" onclick="window.location='/regist';" />     
+
+<% }else{%>
+	<p> <%=name%>(<%=userid%>)님 안녕하세요.</p>
+
+	<input type="button" value="로그아웃" onclick="window.location='/logout';" />     
+
+<% }%>
+<p>
+
+	<input type="button" value="게시판" onclick="window.location='/board';" />     
+
+</p>        
+</body>
+
+</html>

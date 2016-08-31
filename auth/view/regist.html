@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	
+<head>
+	<meta charset="UTF-8">
+	<title>우분투 리눅스 웹서버</title>
+<script> 
+		var app = angular.module("myApp", []);	
+		
+		app.controller("myCtrl", function($scope){
+			var years = [];
+			var mount = [];
+			var day = [];
+			
+			var email = [
+				'직접입력',
+             	'naver.com',
+             	'daum.net',
+             	'gmail.com',
+             	'nate.com',
+             	'korea.com'
+			   	];
+			
+			var phone = [
+				'010',
+	            '017',
+	            '019',
+	            '016'
+	            ];
+			
+			var temp = (2016-31);
+			var tick = 0;
+			for(var i=2016;i>=1990;i--) {
+				years.push(i+"");
+				if(i > temp){
+					tick++;
+					day.push(tick+"");
+					if(tick <= 12){
+						mount.push(tick+"");
+					}
+				}	
+			}
+			
+			$scope.years = years;
+			$scope.mount = mount;
+			$scope.day = day;
+			$scope.email = email;
+			$scope.phone= phone;
+			
+			
+		});
+</script>
+</head>
+
+
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">		
+	아이디 :<br>
+	<input type="text" ng-model ="userid"/><br>
+	암호 :<br>
+	<input type="password" ng-model ="pwd"/><br>
+	암호 확인 :<br>
+	<input type="password" ng-model ="pwd_cheack"/><br>
+	이름 :<br>
+	<input type="text" ng-model ="name"/><br>
+	성별 :<br>
+	<input type="radio" ng-model="gender" value="0"> 남성 
+	<input type="radio" ng-model="gender" value="1"> 여성<br>
+	생년월일 :<br>
+	<select ng-model="date_1" ng-options="x for x in years"></select>년
+	<select ng-model="date_2" ng-options="x for x in mount"></select>월
+	<select ng-model="date_3" ng-options="x for x in day"></select>일<br>
+	연락처 :<br> 
+	<select ng-model="phone_1" ng-options="x for x in phone"></select>
+	<input type="text" ng-model ="phone_2"/>-<input type="text" ng-model ="phone_3"/><br>
+	이메일 :<br>
+	<input type="text" ng-model ="email_id"/>@<input type="text" ng-model ="email_domain"/>
+	<select ng-model="email_domain" ng-options="x for x in email"></select><br>
+	주소 :<br>
+	<input type="text" ng-model ="addr"/><br>
+
+
+	<form action="/regist" method="POST">
+		<input name= "p_userid" type= "hidden" ng-value="userid"/>
+		<input name= "p_pwd" type= "hidden" ng-value="pwd"/>
+		<input name= "p_name" type= "hidden" ng-value="name"/>
+		<input name= "p_gender" type= "hidden" ng-value="gender"/>
+		<input name= "p_birthdate" type= "hidden" ng-value="date_1+date_2+date_3"/>
+		<input name= "p_phone" type= "hidden" ng-value="phone_1+'-'+phone_2+'-'+phone_3"/>
+		<input name= "p_email" type= "hidden" ng-value="email_id+'@'+email_domain"/>
+		<input name= "p_addr" type= "hidden" ng-value="addr"/>	
+		
+		<input type="submit" value="회원가입" />	
+		<!-- angular post hidden field : ng-value -->
+	</form>
+	 
+</div>
+</body>
+
+</html>

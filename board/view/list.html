@@ -1,0 +1,132 @@
+<%
+
+	//현재 페이지
+	var currentPage = 1;
+
+	if(typeof data != "undefined"){
+		currentPage = data;
+	}
+
+	//총 레코드
+	var totalRecord = dataArray.length; 
+
+	//페이지당 보여질 레코드 수
+	var pageSize = 5;
+
+	//블럭당 보여질 페이지 수
+	var blockSize = 5;
+
+
+	//총 페이지 수 구하기
+	var totalPage = Math.ceil(totalRecord/pageSize);
+	
+
+	//블럭당 for문의 시작 페이지 수
+	var firstPage = currentPage - ((currentPage-1)%blockSize);
+	
+	//블럭당 for문의 마지막 페이지 수
+	var lastPage = firstPage + (blockSize-1);
+	
+	//각 페이지당 시작 list의 index
+	var curPos = (currentPage-1)*pageSize;
+
+	//페이지당 시작 번호
+	var num = totalRecord-curPos;
+
+
+%>
+
+<%="총 레코드수는 "+totalRecord%>
+<%="레코드제한수 "+pageSize%>
+<%="총 페이지수는 "+totalPage%>
+
+<%="현재 페이지는 "+currentPage%>
+
+<%="블럭당 for문의 시작 페이지수는 "+firstPage%>
+<%="블럭당 for문의 마지막 페이지수는 "+lastPage%>
+<%="각 페이지당 시작 index "+curPos%>
+<%="페이지당 시작 번호 "+num%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>우분투 리눅스 웹서버</title>
+	<style>
+		#box{
+			font-size:14pt;
+			border: 1px solid ;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>목록</h1>
+
+	<table id="box">
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>작성자</td>
+			<td>조회수</td>
+			<td>댓글</td>
+			<td>작성일</td>
+		</tr>
+
+		<%for(var i=1;i <=pageSize;i++){%>
+			<% if(curPos < totalRecord){ %>
+
+				<% var json=dataArray[curPos++]; %>
+
+				<tr>
+					<td><%=curPos%></td>
+					
+					<td>
+						<a href="/board/<%=json.id%>">
+							<%=json.title%>
+						</a>
+					</td>
+					
+					<td><%=json.name%></td>
+					<td><%=json.hit%></td>
+					<td><%=json.comment%></td>
+					<td><%=json.created%></td>
+					
+				</tr>
+
+			<%}%>
+		<%}%>
+		 <tr>
+		 	<td id="paging" height="20" colspan="5" align="center">
+				<%if(firstPage == 1){%>
+					◀
+				<%}else{%>
+					<a href="/board/?page=<%=firstPage-1%>">◀</a>
+				<%}%>
+					<%for(var i=firstPage;i <=lastPage;i++){%>
+					 	
+					 	<% var currentBlock = i%>
+
+					 	<% if(currentBlock <= totalPage) {%>
+
+					 		<a href="/board/?page=<%=currentBlock%>">
+							[	<%=currentBlock%>]
+					 		</a>
+
+				 		<%}%>
+
+				 	<%}%>
+				<%if(lastPage >= totalPage){%>
+					▶
+				<%}else{%>
+			 		<a href="/board/?page=<%=lastPage+1%>">▶</a>
+		 		<%}%>
+		 	</td>
+		 </tr>		
+	</table>
+	<p>
+	<input type="button" value="작성" onclick="location.href='/board/new'" />
+
+</body>
+
+</html>

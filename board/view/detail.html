@@ -1,0 +1,55 @@
+<% var json=dataArray[0]%>
+
+<!DOCTYPE html>
+
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<title>우분투 리눅스 웹서버</title>
+<script> 
+	var app = angular.module("myApp", []);	
+
+	app.controller("myCtrl", function($scope){
+		$scope.json=
+		{
+			name:"<%=json.name%>",
+			hit:"<%=json.hit%>",
+			comment:"<%=json.comment%>",
+			created:"<%=json.created%>",
+			title:"<%=json.title%>",
+			content:"<%=json.content%>"
+		};
+	});	
+</script>			
+</head>
+
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+	<h1>내용</h1>
+
+	<form action="/board/<%= json.id%>?_method=DELETE" method="POST">
+		
+		<p>작성자 : {{json.name}} 조회수 {{json.hit}} 댓글수 {{json.comment}} 작성일 {{json.created}} </p>
+		
+		제목 : 
+		<input type="text" ng-model="json.title" readonly/>
+		<br>
+		
+		내용 : 
+		<br>
+		<textarea rows="10" cols="10" ng-model="json.content" readonly></textarea>
+		<p>	
+		
+		<input type="button" value="작성" onclick="location.href='/board/new'" />
+		<% if(name == json.name){%>
+			<input type="button" value="수정" onclick="location.href='/board/<%= json.id%>/edit'" />
+			<input type="submit" value="삭제"/>
+		<% } %>
+		<input type="button" value="목록" onclick="location.href='/board'" />
+	
+	</form>
+</div>
+</body>
+
+</html>

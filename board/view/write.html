@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>우분투 리눅스 웹서버</title>
+	
+</head>
+<body>
+ <div ng-app="myApp" ng-controller="myCtrl">
+	
+	<h1>작성</h1>
+
+	<form action="/board" method="POST">
+		
+		제목 : <input type="text" name ="b_title"/>
+		<br>
+		
+		내용 : 
+		<br>
+		<textarea name="b_content" rows="10" cols="10"></textarea>
+		<p>
+		
+		<input type="submit" value="작성" />
+	
+	</form>
+	
+</div>
+</body>
+
+</html>

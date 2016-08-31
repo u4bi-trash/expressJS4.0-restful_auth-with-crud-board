@@ -1,0 +1,43 @@
+<% var json=dataArray[0]%>
+
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>	
+<head>
+	<meta charset="UTF-8">
+	<title>우분투 리눅스 웹서버</title>
+<script>
+	var app = angular.module("myApp", []);	
+	
+	app.controller("myCtrl", function($scope){
+		$scope.json=
+		{
+			title:"<%=json.title%>",
+			content:"<%=json.content%>"
+		};
+	});	
+</script>
+</head>
+
+<body>
+<div ng-app="myApp" ng-controller="myCtrl">
+
+	<h1>수정</h1>
+
+	<form action="/board/<%= json.id%>?_method=PUT" method="POST">
+		
+		제목 : 
+		<input type="text" name ="b_title" ng-model="json.title" />
+		<br>
+		내용 : 
+		<br>
+		<textarea name="b_content" rows="10" cols="10" ng-model="json.content"></textarea>
+		<p>	
+		
+		<input type="submit" value="수정" />
+	
+	</form>
+</div>
+</body>
+
+</html>
