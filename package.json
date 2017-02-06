@@ -1,0 +1,29 @@
+{
+  "name": "express4-auth-with-crud-restful-app",
+  "version": "1.0.0",
+  "description": "Node.js Angular.js ExpressJS 프레임워크 Restful API CRUD 회원가입 and 게시판 개발",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.2",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "method-override": "^2.3.7",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u4bi/restful_web_nodejs-auth-with-crud-board.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/u4bi/restful_web_nodejs-auth-with-crud-board/issues"
+  },
+  "homepage": "https://github.com/u4bi/restful_web_nodejs-auth-with-crud-board#readme"
+}
