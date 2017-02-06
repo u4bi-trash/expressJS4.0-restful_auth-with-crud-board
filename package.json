@@ -1,6 +1,6 @@
 {
   "name": "express4-auth-with-crud-restful-app",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "Node.js Angular.js ExpressJS 프레임워크 Restful API CRUD 회원가입 and 게시판 개발",
   "main": "app.js",
   "dependencies": {
